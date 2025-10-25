@@ -1,0 +1,236 @@
+## 🧩 SCOTT Schema Recap
+
+Tables:
+
+* **EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)**
+* **DEPT(DEPTNO, DNAME, LOC)**
+* **SALGRADE(GRADE, LOSAL, HISAL)**
+* **BONUS(ENAME, JOB, SAL, COMM)**
+
+---
+
+# 🟢 1–50: Beginner Level
+
+Basic SELECTs, WHERE, ORDER BY, LIMIT, etc.
+
+1. Display all records from the EMP table.
+2. Show the employee name and job for all employees.
+3. List the names and salaries of all employees.
+4. Show all employees who work in department 10.
+5. Display all employees whose job is 'MANAGER'.
+6. Find employees with salary greater than 2000.
+7. List employees whose salary is between 1000 and 3000.
+8. Display employees who were hired after 1981-01-01.
+9. List all employees whose commission is not null.
+10. Find all employees whose name starts with ‘A’.
+11. Display all employees whose name ends with ‘N’.
+12. Find all employees whose name contains ‘L’.
+13. List all employees in ascending order of salary.
+14. List all employees in descending order of hire date.
+15. Show the top 5 highest-paid employees.
+16. Show the lowest 3 salaries in the company.
+17. Find the employee with the maximum salary.
+18. Find the employee with the minimum salary.
+19. Display the total number of employees.
+20. Show the total salary paid to all employees.
+21. Find the average salary of all employees.
+22. Find the number of distinct job titles.
+23. List all job titles in alphabetical order.
+24. Show employee names and their departments.
+25. Display all department names from DEPT.
+26. Show the name, job, and department number for each employee.
+27. Find employees whose department is located in 'DALLAS'.
+28. List all employees who do not have a manager.
+29. Find employees who have commission greater than their salary.
+30. Display employees whose job is not 'CLERK'.
+31. Show employee details for those who joined in 1981.
+32. Display the names of employees who joined in the month of December.
+33. Display all employees with their annual salary (SAL * 12).
+34. Find employees whose name has exactly 5 letters.
+35. Show employees with no commission.
+36. Display all departments located in 'CHICAGO'.
+37. Show employees hired in 1982 or later.
+38. List all managers (distinct MGR numbers).
+39. Find employees who report to 'KING'.
+40. Display employees working in the same department as 'BLAKE'.
+41. Find employees whose salary is same as 'FORD'.
+42. List all employees whose salary is greater than 'MILLER'.
+43. Find employees in department 20 earning more than 2000.
+44. Display name, job, and commission of salesmen only.
+45. Show employees with salary between 1500 and 2500 in dept 30.
+46. Find all employees who joined before their manager.
+47. Show all employees except 'KING' and 'FORD'.
+48. Find all employees whose name starts with ‘S’ and ends with ‘T’.
+49. List employee names and the length of their names.
+50. Display all employees ordered by department and then by salary.
+
+---
+
+# 🟡 51–100: Intermediate Level
+
+Aggregation, GROUP BY, HAVING, Joins, Functions, Subqueries
+
+51. Find the number of employees in each department.
+52. Find the average salary per department.
+53. Display total salary per job title.
+54. Show the department with the maximum number of employees.
+55. Find departments where average salary is above 2000.
+56. Display job titles having more than 3 employees.
+57. Find the total commission paid per department.
+58. List departments that have no employees.
+59. Display employees and their department names using JOIN.
+60. Show employees and their department location.
+61. Display employees with their manager names.
+62. List employee name, manager name, and manager’s job.
+63. Find employees who earn more than their manager.
+64. Show employees earning more than the average salary.
+65. Find employees whose salary equals the department average.
+66. List departments whose maximum salary > 3000.
+67. Display employees with salary greater than average of their dept.
+68. Find employees with the same job as ‘ALLEN’.
+69. Show employees hired before ‘MILLER’.
+70. Display department number, total salary, and total commission.
+71. Find the highest salary per job title.
+72. Find the lowest salary per department.
+73. Display total and average salary company-wide.
+74. Find how many employees have null commissions.
+75. List employees hired in each year.
+76. Show the number of employees per year of joining.
+77. Display the employee hired earliest.
+78. Find the latest joining date per department.
+79. Show all job titles in department 30.
+80. Find the count of employees per job title.
+81. Find the total salary of all clerks.
+82. Display employees whose salary is higher than all salesmen.
+83. Display employees whose salary is less than any manager.
+84. Show departments where no employee earns below 1000.
+85. Find all employees earning between the LOSAL and HISAL in SALGRADE.
+86. Display each employee’s salary grade.
+87. List employees along with their grade and department name.
+88. Show how many employees belong to each salary grade.
+89. Display departments with at least one ANALYST.
+90. Find the department that has both CLERK and MANAGER.
+91. Display total salary and average salary per grade.
+92. Show all employees with grade higher than 'WARD'.
+93. List all employees whose salary is greater than LOSAL of grade 4.
+94. Display names of managers who have more than 2 subordinates.
+95. List all employees reporting directly or indirectly to ‘KING’.
+96. Find departments without MANAGERs.
+97. Display departments where total commission > 1000.
+98. Show all jobs with total salary < 5000.
+99. Find the total number of managers in the company.
+100. Display all employees whose manager is from department 10.
+
+---
+
+# 🔵 101–150: Advanced Level
+
+Subqueries, Nested Joins, Analytical thinking, Self joins
+
+101. Find employees earning more than the average of department 30.
+102. Show employees whose salary is same as someone else’s.
+103. List departments where all employees earn above 2000.
+104. Find employees who earn the second-highest salary.
+105. Find the nth highest salary (parameterized subquery).
+106. Display employees who have the same job as their manager.
+107. Show employees hired before their manager.
+108. Find employees who are managers themselves.
+109. Display all employees who are not managers.
+110. Find employees earning between the LOSAL and HISAL for grade 3.
+111. List the employee(s) who earn maximum salary in their dept.
+112. Find employees who joined on the same date.
+113. Show total salary of departments located in ‘DALLAS’.
+114. List department names with average salary > 2500.
+115. Find the job with the highest total salary.
+116. Display employee with minimum commission among all salesmen.
+117. Find which department has most managers.
+118. List department(s) that have employees in all job types.
+119. Find employees with the same salary but different jobs.
+120. Display employees whose salary difference with manager > 1000.
+121. Show department and average grade of its employees.
+122. Display the employee(s) who joined most recently in each dept.
+123. Find employees whose salary equals max salary of any dept.
+124. List departments where no salesman works.
+125. Show employees who earn within grade 2 or 3.
+126. Display employees with no subordinates.
+127. Find average salary per department and grade.
+128. List all departments with more than one grade.
+129. Find employees whose salary > avg salary of their job.
+130. Display job titles that exist in more than one department.
+131. Find the number of unique managers.
+132. Display employee who earns second lowest salary in dept 30.
+133. List employees who earn more than 80% of max salary in company.
+134. Find the difference between highest and lowest salary.
+135. Display the total salary of all employees working under each manager.
+136. Find how many employees were hired each quarter of the year.
+137. Show departments with cumulative salary > 8000.
+138. Find employees who don’t appear in the BONUS table.
+139. List BONUS entries without a matching EMP record.
+140. Find employees whose commission is > 50% of their salary.
+141. Display the ratio of commission to salary for salesmen.
+142. Show the name and dept of highest paid employee.
+143. Find total salary expense for each location.
+144. List top 3 highest paid employees per department.
+145. Display all employees sorted by grade and then salary.
+146. Find average salary for each manager’s team.
+147. Display number of subordinates for each manager.
+148. Find employees who report indirectly to 'KING'.
+149. Show hierarchy (KING → managers → clerks) using self join.
+150. List all employees along with their manager and department location.
+
+---
+
+# 🔴 151–200: Expert Level
+
+Complex subqueries, correlated queries, analytical scenarios, updates
+
+151. Display employees earning more than dept average salary.
+152. Show each department’s highest-paid employee.
+153. Find all managers who have employees with higher salary than them.
+154. Find employees who are the only one with their job in a department.
+155. List department with highest average salary.
+156. Show department having lowest total salary.
+157. Find job type with maximum average salary.
+158. Display employees who belong to the top salary grade.
+159. Find the total number of employees under each grade.
+160. Display employee names along with salary difference from dept avg.
+161. Find the average commission for salesmen.
+162. Display departments where total commission > total salary.
+163. List all employees working in cities starting with ‘C’.
+164. Find which manager handles maximum employees.
+165. Show department having the youngest employee (earliest hire date).
+166. Display salary ranking of each employee (use window function if supported).
+167. Show the difference between current employee’s salary and previous one by hire date (window function).
+168. Find running total of salaries by department.
+169. Find cumulative average of salaries ordered by hire date.
+170. Show percentile rank of each employee based on salary.
+171. Display department-wise median salary.
+172. Find correlation between salary and commission.
+173. Find departments with salary variance above company average.
+174. Show employees earning more than company average by at least 20%.
+175. Find departments where at least half of employees are MANAGERs.
+176. Display employees who have never changed departments (historical check).
+177. Create a view showing employee name, job, dept, and grade.
+178. Create a view showing total salary per location.
+179. Create a view showing each manager and number of subordinates.
+180. Write a stored procedure to show employees of a given department.
+181. Write a stored procedure to find nth highest salary.
+182. Write a query to update all commissions by +10%.
+183. Delete employees earning below 900.
+184. Add a new department called “IT” in “SEATTLE”.
+185. Add a new employee under department IT.
+186. Update salary of ‘CLERK’s to increase by 500.
+187. Delete all employees who have no department assigned.
+188. Display total employees after deletion.
+189. Use a subquery to display employees hired after the average hire date.
+190. Use EXISTS to find departments with employees.
+191. Use NOT EXISTS to find departments without employees.
+192. Use IN to list all employees in departments 10 and 30.
+193. Use ANY to compare employee salary with department averages.
+194. Use ALL to find employees earning more than all clerks.
+195. Combine EMP and BONUS tables using UNION.
+196. Display duplicate employee names if any (use GROUP BY + HAVING).
+197. Find total salary by year using EXTRACT(YEAR FROM HIREDATE).
+198. Find average tenure (years since hire) per department.
+199. List employees hired in leap years.
+200. Generate a report showing employee name, department, grade, and location sorted by grade descending.
