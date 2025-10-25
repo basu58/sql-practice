@@ -116,4 +116,63 @@ select * from emp where ename like 'S%' and ename like '%T';
 -- 49. List employee names and the length of their names.
 select ename, CHAR_LENGTH(ename) name_length from emp; 
 -- 50. Display all employees ordered by department and then by salary.
-select * from emp order by deptno, sal 
+select * from emp order by deptno, sal; 
+-- 51. Find the number of employees in each department.
+select deptno, count(*) count_of_emp from emp group by 1;
+-- 52. Find the average salary per department.
+select deptno, avg(sal) from emp group by 1;
+-- 53. Display total salary per job title.
+select job, sum(sal) total_sal from emp group by 1;
+-- 54. Show the department with the maximum number of employees.
+select deptno, count(*) total_emp from emp group by 1 ORDER BY total_emp desc limit 1;
+select deptno, no_of_emp  FROM
+(
+    select deptno, count(*) no_of_emp, DENSE_RANK()over(order by count(*) desc) rnk from emp group by deptno
+) a
+where rnk = 1;
+-- 55. Find departments where average salary is above 2000.
+-- 56. Display job titles having more than 3 employees.
+-- 57. Find the total commission paid per department.
+-- 58. List departments that have no employees.
+-- 59. Display employees and their department names using JOIN.
+-- 60. Show employees and their department location.
+-- 61. Display employees with their manager names.
+-- 62. List employee name, manager name, and manager’s job.
+-- 63. Find employees who earn more than their manager.
+-- 64. Show employees earning more than the average salary.
+-- 65. Find employees whose salary equals the department average.
+-- 66. List departments whose maximum salary > 3000.
+-- 67. Display employees with salary greater than average of their dept.
+-- 68. Find employees with the same job as ‘ALLEN’.
+-- 69. Show employees hired before ‘MILLER’.
+-- 70. Display department number, total salary, and total commission.
+-- 71. Find the highest salary per job title.
+-- 72. Find the lowest salary per department.
+-- 73. Display total and average salary company-wide.
+-- 74. Find how many employees have null commissions.
+-- 75. List employees hired in each year.
+-- 76. Show the number of employees per year of joining.
+-- 77. Display the employee hired earliest.
+-- 78. Find the latest joining date per department.
+-- 79. Show all job titles in department 30.
+-- 80. Find the count of employees per job title.
+-- 81. Find the total salary of all clerks.
+-- 82. Display employees whose salary is higher than all salesmen.
+-- 83. Display employees whose salary is less than any manager.
+-- 84. Show departments where no employee earns below 1000.
+-- 85. Find all employees earning between the LOSAL and HISAL in SALGRADE.
+-- 86. Display each employee’s salary grade.
+-- 87. List employees along with their grade and department name.
+-- 88. Show how many employees belong to each salary grade.
+-- 89. Display departments with at least one ANALYST.
+-- 90. Find the department that has both CLERK and MANAGER.
+-- 91. Display total salary and average salary per grade.
+-- 92. Show all employees with grade higher than 'WARD'.
+-- 93. List all employees whose salary is greater than LOSAL of grade 4.
+-- 94. Display names of managers who have more than 2 subordinates.
+-- 95. List all employees reporting directly or indirectly to ‘KING’.
+-- 96. Find departments without MANAGERs.
+-- 97. Display departments where total commission > 1000.
+-- 98. Show all jobs with total salary < 5000.
+-- 99. Find the total number of managers in the company.
+-- 100. Display all employees whose manager is from department 10.
