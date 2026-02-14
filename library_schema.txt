@@ -1,0 +1,94 @@
+-- ============================================
+-- LIBRARY MANAGEMENT PRACTICE SCHEMA
+-- ============================================
+
+-- Drop tables if exist (safe re-run)
+DROP TABLE IF EXISTS borrow CASCADE;
+DROP TABLE IF EXISTS books CASCADE;
+DROP TABLE IF EXISTS members CASCADE;
+DROP TABLE IF EXISTS authors CASCADE;
+
+-- ============================================
+-- 1. AUTHORS TABLE
+-- ============================================
+
+CREATE TABLE authors (
+    author_id INTEGER PRIMARY KEY,
+    author_name VARCHAR(100) NOT NULL,
+    country VARCHAR(50)
+);
+
+INSERT INTO authors VALUES
+(1, 'J.K. Rowling', 'UK'),
+(2, 'George Orwell', 'UK'),
+(3, 'Harper Lee', 'USA'),
+(4, 'Dan Brown', 'USA'),
+(5, 'Paulo Coelho', 'Brazil');
+
+-- ============================================
+-- 2. BOOKS TABLE
+-- ============================================
+
+CREATE TABLE books (
+    book_id INTEGER PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    author_id INTEGER,
+    price NUMERIC(8,2),
+    published_year INTEGER,
+    CONSTRAINT fk_author
+        FOREIGN KEY (author_id) REFERENCES authors(author_id)
+);
+
+INSERT INTO books VALUES
+(101, 'Harry Potter and the Sorcerer''s Stone', 1, 500, 1997),
+(102, '1984', 2, 350, 1949),
+(103, 'Animal Farm', 2, 250, 1945),
+(104, 'To Kill a Mockingbird', 3, 400, 1960),
+(105, 'The Da Vinci Code', 4, 450, 2003),
+(106, 'The Alchemist', 5, 300, 1988);
+
+-- ============================================
+-- 3. MEMBERS TABLE
+-- ============================================
+
+CREATE TABLE members (
+    member_id INTEGER PRIMARY KEY,
+    member_name VARCHAR(100),
+    join_date DATE,
+    city VARCHAR(50)
+);
+
+INSERT INTO members VALUES
+(201, 'Amit Sharma', '2023-01-10', 'Delhi'),
+(202, 'Priya Singh', '2023-02-15', 'Mumbai'),
+(203, 'Rahul Verma', '2023-03-20', 'Bangalore'),
+(204, 'Sneha Patil', '2023-04-05', 'Hyderabad');
+
+-- ============================================
+-- 4. BORROW TABLE
+-- ============================================
+
+CREATE TABLE borrow (
+    borrow_id INTEGER PRIMARY KEY,
+    book_id INTEGER,
+    member_id INTEGER,
+    borrow_date DATE,
+    return_date DATE,
+    CONSTRAINT fk_book
+        FOREIGN KEY (book_id) REFERENCES books(book_id),
+    CONSTRAINT fk_member
+        FOREIGN KEY (member_id) REFERENCES members(member_id)
+);
+
+INSERT INTO borrow VALUES
+(1, 101, 201, '2023-05-01', '2023-05-10'),
+(2, 102, 202, '2023-05-03', '2023-05-12'),
+(3, 105, 203, '2023-05-05', NULL),
+(4, 106, 201, '2023-06-01', '2023-06-15'),
+(5, 103, 204, '2023-06-10', NULL);
+
+-- ============================================
+-- Script Completed
+-- ============================================
+
+SELECT 'Library schema created successfully!' AS message;
