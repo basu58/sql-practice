@@ -1,6 +1,7 @@
+-- Active: 1761839652013@@127.0.0.1@5433@employee
 use employee;
 --1. Display all records from the EMP table
-select * from emp;
+select * from salgrade;
 --2. Show the employee name and job for all employees.
 select ename, job from emp;
 --3. List the names and salaries of all employees.
@@ -131,32 +132,103 @@ select deptno, no_of_emp  FROM
 ) a
 where rnk = 1;
 -- 55. Find departments where average salary is above 2000.
+SELECT deptno, AVG(sal) as avg_sal 
+FROM emp 
+GROUP BY deptno 
+HAVING AVG(sal) > 2000;
 -- 56. Display job titles having more than 3 employees.
+select Job, count(*) no_of_emp from emp GROUP BY Job having count(*) > 3;
 -- 57. Find the total commission paid per department.
+select deptno, sum(comm) tot_comm FROM emp group by 1;
 -- 58. List departments that have no employees.
+SELECT d.deptno, d.dname 
+FROM dept d
+LEFT JOIN emp e ON d.deptno = e.deptno
+WHERE e.empno IS NULL;
 -- 59. Display employees and their department names using JOIN.
+select e.empno, e.ename, d.deptno, d.dname
+from emp e full outer join 
+dept d 
+on e.DEPTNO = d.DEPTNO;
 -- 60. Show employees and their department location.
+select e.empno, e.ename, d.deptno, d.dname, d.loc
+from emp e full outer join dept d
+on e.deptno = d.deptno;
 -- 61. Display employees with their manager names.
+select * from emp;
+
+select e1.empno, e1.ename, e2.ename as manager
+from emp e1
+left join
+emp e2 on
+e1.mgr = e2.empno;
+
 -- 62. List employee name, manager name, and manager’s job.
+select e1.empno, e1.ename, e2.ename as manager, e2.job as manager_job
+from emp e1
+left join
+emp e2 on
+e1.mgr = e2.empno;
 -- 63. Find employees who earn more than their manager.
+select e1.empno, e1.ename, e2.ename as manager, e1.sal employee_salary, e2.sal manager_salary
+from emp e1
+left join
+emp e2 on
+e1.mgr = e2.empno
+where e1.sal > e2.sal;
 -- 64. Show employees earning more than the average salary.
+with avs as
+(
+select avg(sal) avg_sal from emp
+)
+select ename, sal, avg_sal
+from emp, avs
+where sal > avg_sal;
 -- 65. Find employees whose salary equals the department average.
+select * from
+(select empno, ename, deptno, sal, floor(avg(sal)over(PARTITION BY deptno)) dept_avg from emp)
+where floor(sal) = floor(dept_avg);
 -- 66. List departments whose maximum salary > 3000.
+select deptno, max(sal) sal from emp group by deptno having max(sal) > 3000;
 -- 67. Display employees with salary greater than average of their dept.
+WITH avg_sal AS (
+  SELECT deptno, AVG(sal) AS dept_avg_sal FROM emp GROUP BY deptno
+)
+SELECT e.empno, e.ename, e.deptno, e.sal, a.dept_avg_sal
+FROM emp e
+JOIN avg_sal a ON e.deptno = a.deptno
+WHERE e.sal > a.dept_avg_sal;
+select * from
+(select empno, ename, deptno,sal, avg(sal)over(partition by deptno) avg_sal from emp)
+where sal > avg_sal;
 -- 68. Find employees with the same job as ‘ALLEN’.
+select * from emp where job = (select job from emp where ename = 'ALLEN');
 -- 69. Show employees hired before ‘MILLER’.
+select * from emp where hiredate < (select hiredate from emp where ename = 'MILLER');
 -- 70. Display department number, total salary, and total commission.
+select deptno, sum(sal) total_sal, sum(comm) total_comm from emp group by 1;
 -- 71. Find the highest salary per job title.
+select job, max(sal) highest_sal from emp group by 1;
 -- 72. Find the lowest salary per department.
+select job, min(sal) highest_sal from emp group by 1;
 -- 73. Display total and average salary company-wide.
+select sum(sal) total_sal, avg(sal) avg_sal from emp;
 -- 74. Find how many employees have null commissions.
+select count(*) from emp where comm is NULL;
 -- 75. List employees hired in each year.
+select extract(year from hiredate) hire_year, empno, ename, hiredate from emp;
 -- 76. Show the number of employees per year of joining.
+select extract(year from hiredate) hire_year, count(*) from emp group by 1;
 -- 77. Display the employee hired earliest.
+SELECT * from emp ORDER BY hiredate limit 1;
 -- 78. Find the latest joining date per department.
+select max(hiredate) from emp;
 -- 79. Show all job titles in department 30.
+select DISTINCT job from emp where deptno = 30;
 -- 80. Find the count of employees per job title.
+SELECT job, count(*) from emp GROUP BY 1;
 -- 81. Find the total salary of all clerks.
+select sum(sal) total_sal from emp where job = 'CLERK'
 -- 82. Display employees whose salary is higher than all salesmen.
 -- 83. Display employees whose salary is less than any manager.
 -- 84. Show departments where no employee earns below 1000.
