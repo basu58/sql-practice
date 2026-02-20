@@ -228,21 +228,72 @@ select DISTINCT job from emp where deptno = 30;
 -- 80. Find the count of employees per job title.
 SELECT job, count(*) from emp GROUP BY 1;
 -- 81. Find the total salary of all clerks.
-select sum(sal) total_sal from emp where job = 'CLERK'
+select sum(sal) total_sal from emp where job = 'CLERK';
 -- 82. Display employees whose salary is higher than all salesmen.
+select * from emp where sal > (select max(sal) from emp where job = 'SALESMAN');
 -- 83. Display employees whose salary is less than any manager.
+select * from emp where sal < (select min(sal) from emp where job = 'MANAGER');
 -- 84. Show departments where no employee earns below 1000.
+select * from emp where deptno not in (select deptno from emp where sal < 1000);
 -- 85. Find all employees earning between the LOSAL and HISAL in SALGRADE.
+select * from salgrade;
+select e.*, s.losal, s.hisal from emp e 
+JOIN
+salgrade s
+on e.sal between s.losal and s.hisal;
 -- 86. Display each employee’s salary grade.
+select e.empno, e.ename, s.grade from emp e
+join salgrade s
+on e.sal between s.losal and s.hisal;
 -- 87. List employees along with their grade and department name.
+select e.empno, e.ename, s.grade, e.deptno from emp e
+join salgrade s
+on e.sal between s.losal and s.hisal;
 -- 88. Show how many employees belong to each salary grade.
+select s.grade, count(e.empno) no_of_emplooyees from emp e
+join salgrade s
+on e.sal between s.losal and s.hisal
+GROUP BY 1 order by grade;
 -- 89. Display departments with at least one ANALYST.
+select * from dept;
+
+select e.empno, e.ename, d.deptno, d.dname from emp e
+join dept d
+on e.deptno = d.deptno
+where e.job = 'ANALYST';
 -- 90. Find the department that has both CLERK and MANAGER.
+select e.empno, e.ename, d.deptno, d.dname from emp e
+join dept d
+on e.deptno = d.deptno
+where e.job in ('CLERK', 'MANAGER');
 -- 91. Display total salary and average salary per grade.
+select s.grade, sum(e.sal) total_sal, avg(e.sal) avg_sal  from emp e
+join salgrade s
+on e.sal between s.losal and s.hisal
+GROUP BY 1 order by grade;
 -- 92. Show all employees with grade higher than 'WARD'.
+select s.grade, e.*  from emp e
+join salgrade s
+on e.sal between s.losal and s.hisal
+where s.grade > (SELECT s.grade from emp e join salgrade s on e.sal between s.losal and s.hisal where e.ename = 'WARD')
+order by grade;
 -- 93. List all employees whose salary is greater than LOSAL of grade 4.
+select e.*  from emp e
+join salgrade s
+on e.sal between s.losal and s.hisal
+where e.sal > (SELECT losal from salgrade where grade = 4);
 -- 94. Display names of managers who have more than 2 subordinates.
+with a1 as
+(select e1.ename employee_name, e2.ename manager from emp e1 
+join emp e2 on
+e1.mgr = e2.empno)
+select manager, count(employee_name) count_of_subordinates from a1 group by 1 having count(employee_name) > 2;
 -- 95. List all employees reporting directly or indirectly to ‘KING’.
+with a1 as
+(select e1.ename employee_name, e2.ename manager from emp e1 
+join emp e2 on
+e1.mgr = e2.empno)
+select * from a1 where manager = 
 -- 96. Find departments without MANAGERs.
 -- 97. Display departments where total commission > 1000.
 -- 98. Show all jobs with total salary < 5000.
