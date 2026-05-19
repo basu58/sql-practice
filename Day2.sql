@@ -1,45 +1,53 @@
 -- 🔹 Basic SELECT (1–20)
+SELECT * FROM authors;
+SELECT * FROM books;
+SELECT * FROM members;
+SELECT * FROM borrow;
 
 -- 1. Show all books available in the library.
-
+select * from books;
 -- 2. Display all members from Delhi.
-
+select * from members where city = 'Delhi';
 -- 3. List all authors from the UK.
-
+select * from authors where country = 'UK';
 -- 4. Show book title and price for all books.
-
+select title, price from books;
 -- 5. Display members who joined after 2023-02-01.
-
+select * from members where join_date > '2023-02-01';
 -- 6. Show books published after 2000.
-
+select * from books where published_year > 2000;
 -- 7. List all borrow records.
-
+select * from borrow;
 -- 8. Show only book titles.
-
+select title from books;
 -- 9. Display distinct cities of members.
-
+select distinct city from members;
 -- 10. Show books with price greater than 400.
-
+SELECT * from books where price > 400;
 -- 11. List books with price less than or equal to 300.
-
+select * from books where price <= 300;
 -- 12. Show members whose name starts with 'A'.
-
+select * from members where member_name like 'A%';
 -- 13. Display authors whose name ends with 'n'.
-
+select * from authors where author_name like '%n';
 -- 14. List books published between 1940 and 2000.
-
+select * from books where published_year between 1940 and 2000;
 -- 15. Show borrow records where return_date is NULL.
-
+select * from borrow where return_date is null;
 -- 16. Display books sorted by price (ascending).
-
+select * from books order by price; 
 -- 17. Display books sorted by published year (descending).
-
+select * from books order by published_year;
 -- 18. Show members ordered by join_date.
-
+select * from members order by join_date;
 -- 19. Display top 3 most expensive books.
-
+select * from
+(select book_id, title, price, rank() over(order by price desc) r from books)
+where r <= 3;
 -- 20. Show the cheapest book.
-
+select * from
+(select book_id, title, price, rank() over(order by price) r from books)
+where r = 1;
 -- 🔹 WHERE Conditions (21–35)
 
 -- 21. Find books written by author_id = 2.
