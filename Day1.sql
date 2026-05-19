@@ -1,4 +1,4 @@
--- Active: 1761839652013@@127.0.0.1@5433@employee
+-- Active: 1761401198479@@127.0.0.1@3306@employee
 use employee;
 --1. Display all records from the EMP table
 select * from salgrade;
@@ -289,13 +289,35 @@ join emp e2 on
 e1.mgr = e2.empno)
 select manager, count(employee_name) count_of_subordinates from a1 group by 1 having count(employee_name) > 2;
 -- 95. List all employees reporting directly or indirectly to ‘KING’.
-with a1 as
-(select e1.ename employee_name, e2.ename manager from emp e1 
-join emp e2 on
-e1.mgr = e2.empno)
-select * from a1 where manager = 
+WITH RECURSIVE emp_hierarchy AS (
+    -- Base case: Start with KING
+    SELECT empno, ename, mgr, 1 as level
+    FROM emp
+    WHERE ename = 'KING'
+    
+    UNION ALL
+    -- Recursive case: Find all employees reporting to those in the hierarchy
+    SELECT e.empno, e.ename, e.mgr, h.level + 1
+    FROM emp e
+    JOIN emp_hierarchy h ON e.mgr = h.empno
+)
+SELECT empno, ename, level FROM emp_hierarchy WHERE ename != 'KING' ORDER BY level, ename;
 -- 96. Find departments without MANAGERs.
+SELECT d.deptno, d.dname 
+FROM dept d
+LEFT JOIN emp e ON d.deptno = e.deptno AND e.job = 'MANAGER'
+WHERE e.empno IS NULL;
 -- 97. Display departments where total commission > 1000.
+select d.deptno, d.dname, e.commission from (select deptno, sum(comm) as commission from emp group by 1) e
+left outer join dept d
+on d.deptno = e.deptno
+where e.commission > 1000;
 -- 98. Show all jobs with total salary < 5000.
+select job, sum(sal) total_salary_by_job from emp group by job having sum(sal) < 5000;
 -- 99. Find the total number of managers in the company.
+select job, count(*) total_managers from emp where job = 'MANAGER' group by 1;
 -- 100. Display all employees whose manager is from department 10.
+select e1.empno emp_no, e1.ename emp_name, e2.ename mgr, e2.deptno mgr_deptno from 
+emp e1 JOIN
+emp e2 on e1.mgr = e2.empno
+where e2.deptno = 10;
