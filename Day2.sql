@@ -51,17 +51,17 @@ where r = 1;
 -- 🔹 WHERE Conditions (21–35)
 
 -- 21. Find books written by author_id = 2.
-
+select * FROM books where author_id = 2;
 -- 22. Show members not from Mumbai.
-
+select * from members where city <> 'Mumbai';
 -- 23. Display books priced between 300 and 500.
-
+select * from books where price between 300 and 500;
 -- 24. Find books with title containing 'Code'.
-
+select * from books where title like '%Code%';
 -- 25. Show authors not from USA.
-
+select * from authors where country <> 'USA';
 -- 26. Display members who joined in March 2023.
-
+select * from members where extract(year from join_date) = 2023 and extract(month from join_date) = 03;
 -- 27. Show borrow records after 2023-05-01.
 
 -- 28. Find books published before 1950.
